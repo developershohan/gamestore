@@ -78,4 +78,4 @@ jobs:
           script: |
             rm -f "${{ github.event_name == 'push' && 'public_html/gamestoredev.proshohan.com' || 'public_html/gamestore.proshohan.com' }}/.maintenance"
             rm -f "${{ github.event_name == 'push' && 'public_html/gamestoredev.proshohan.com' || 'public_html/gamestore.proshohan.com' }}/wpcontent.zip"
-            rm -f "${{ github.event_name == 'push' && 'public_html/gamestoredev.proshohan.com' || 'public_html/gamestore.proshohan.com' }}/wordpress.zip"
+            rm -f "${{ github.event_name == 'push' && 'public_html/gamestoredev.proshohan.com' || 'public_html/gamestore.proshohan.com' }}/wordpress.zip" 
