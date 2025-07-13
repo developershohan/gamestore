@@ -1,9 +1,9 @@
 {
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
-  "name": "blocks-gamestore/block-hero",
+  "name": "blocks-gamestore/block-contact",
   "version": "0.1.0",
-  "title": "Hero Block",
+  "title": "Contact form",
   "category": "widgets",
   "icon": "smiley",
   "description": "Example block scaffolded with Create Block tool.",

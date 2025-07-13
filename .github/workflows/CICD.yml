@@ -12,96 +12,70 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+    - name: Checkout
+      uses: actions/checkout@master
 
-      - name: Prepare WordPress Zip
-        run: |
-          WP_LINK=$(cat wp-version-control.cfg)
-          wget -O "./wordpress.zip" "$WP_LINK"
+    - name: Prepare WordPress Zip
+      run: |
+        WP_LINK=$(cat wp-version-control.cfg)
+        wget -O "./wordpress.zip" $WP_LINK
+  
+    - name: Prepare plugins and theme zip
+      run: zip -r wpcontent.zip plugins mu-plugins themes
 
-      - name: Prepare plugins and theme zip
-        run: |
-          mkdir -p temp/wp-content
-          [ -d "plugins" ] && cp -r plugins temp/wp-content/
-          [ -d "mu-plugins" ] && cp -r mu-plugins temp/wp-content/
-          [ -d "themes" ] && cp -r themes temp/wp-content/
-          cd temp
-          zip -r ../wpcontent.zip wp-content
-          cd ..
-          rm -rf temp
+    - name: Copy Zips to Server
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USER }}
+        password: ${{ secrets.SSH_PASSWORD }}
+        port: ${{ secrets.SSH_PORT }}
+        source: "./wordpress.zip, ./wpcontent.zip"
+        target: ${{ github.event_name == 'push' && 'public_html/gamestoredev' || 'public_html/gamestore' }}
 
-      - name: Show current directory contents
-        run: ls -lh
+    - name: Enable Maintenance Mode
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USER }}
+        password: ${{ secrets.SSH_PASSWORD }}
+        port: ${{ secrets.SSH_PORT }}
+        source: ".maintenance"
+        target: ${{ github.event_name == 'push' && 'public_html/gamestoredev' || 'public_html/gamestore' }}
 
-      - name: Copy Zips to Server
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          password: ${{ secrets.SSH_PASSWORD }}
-          port: ${{ secrets.SSH_PORT }}
-          source: "./wordpress.zip ./wpcontent.zip"
-          target: ${{ github.event_name == 'push' && 'public_html/gamestoredev' || 'public_html/gamestore' }}
+    - name: Update WordPress Core
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USER }}
+        password: ${{ secrets.SSH_PASSWORD }}
+        port: ${{ secrets.SSH_PORT }}
+        script: |
+          find "${{ github.event_name == 'push' && 'public_html/gamestoredev' || 'public_html/gamestore' }}" -type f -name "*.php" ! -name "wp-config.php" -delete
+          rm -r "${{ github.event_name == 'push' && 'public_html/gamestoredev' || 'public_html/gamestore' }}/wp-admin/" "${{ github.event_name == 'push' && 'public_html/gamestoredev' || 'public_html/gamestore' }}/wp-includes/"
+          unzip -o "${{ github.event_name == 'push' && 'public_html/gamestoredev' || 'public_html/gamestore' }}/wordpress.zip" -d "${{ github.event_name == 'push' && 'public_html/gamestoredev' || 'public_html/gamestore' }}/"
+          mv "${{ github.event_name == 'push' && 'public_html/gamestoredev' || 'public_html/gamestore' }}/wordpress"/* "${{ github.event_name == 'push' && 'public_html/gamestoredev' || 'public_html/gamestore' }}/"
+          rm -r "${{ github.event_name == 'push' && 'public_html/gamestoredev' || 'public_html/gamestore' }}/wordpress"
 
-      - name: Enable Maintenance Mode
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          password: ${{ secrets.SSH_PASSWORD }}
-          port: ${{ secrets.SSH_PORT }}
-          source: ".maintenance"
-          target: ${{ github.event_name == 'push' && 'public_html/gamestoredev' || 'public_html/gamestore' }}
+    - name: Update Plugins and Theme
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USER }}
+        password: ${{ secrets.SSH_PASSWORD }}
+        port: ${{ secrets.SSH_PORT }}
+        script: |
+          rm -rf "${{ github.event_name == 'push' && 'public_html/gamestoredev' || 'public_html/gamestore' }}/wp-content/plugins" "${{ github.event_name == 'push' && 'public_html/gamestoredev' || 'public_html/gamestore' }}/wp-content/mu-plugins" "${{ github.event_name == 'push' && 'public_html/gamestoredev' || 'public_html/gamestore' }}/wp-content/themes"
+          unzip -o "${{ github.event_name == 'push' && 'public_html/gamestoredev' || 'public_html/gamestore' }}/wpcontent.zip" -d "${{ github.event_name == 'push' && 'public_html/gamestoredev' || 'public_html/gamestore' }}/wp-content/"
 
-      - name: Update WordPress Core
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          password: ${{ secrets.SSH_PASSWORD }}
-          port: ${{ secrets.SSH_PORT }}
-          script: |
-            DIR=${{ github.event_name == 'push' && 'public_html/gamestoredev' || 'public_html/gamestore' }}
-            find "$DIR" -type f -name "*.php" ! -name "wp-config.php" -delete
-            rm -rf "$DIR/wp-admin/" "$DIR/wp-includes/"
-            unzip -o "$DIR/wordpress.zip" -d "$DIR/"
-            mv "$DIR/wordpress/"* "$DIR/"
-            rm -rf "$DIR/wordpress"
-
-      - name: Update Plugins and Theme
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          password: ${{ secrets.SSH_PASSWORD }}
-          port: ${{ secrets.SSH_PORT }}
-          script: |
-            DIR=${{ github.event_name == 'push' && 'public_html/gamestoredev' || 'public_html/gamestore' }}
-            rm -rf "$DIR/wp-content/plugins" "$DIR/wp-content/mu-plugins" "$DIR/wp-content/themes"
-            unzip -o "$DIR/wpcontent.zip" -d "$DIR/wp-content/"
-
-      - name: Disable Maintenance Mode and Remove Zips
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          password: ${{ secrets.SSH_PASSWORD }}
-          port: ${{ secrets.SSH_PORT }}
-          script: |
-            DIR=${{ github.event_name == 'push' && 'public_html/gamestoredev' || 'public_html/gamestore' }}
-            rm -f "$DIR/.maintenance"
-            rm -f "$DIR/wpcontent.zip"
-            rm -f "$DIR/wordpress.zip"
-
-      - name: Confirm Files on Server
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          password: ${{ secrets.SSH_PASSWORD }}
-          port: ${{ secrets.SSH_PORT }}
-          script: |
-            DIR=${{ github.event_name == 'push' && 'public_html/gamestoredev' || 'public_html/gamestore' }}
-            echo "Files in $DIR:"
-            ls -lh "$DIR"
+    - name: Disable Maintenance Mode and Remove zips
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USER }}
+        password: ${{ secrets.SSH_PASSWORD }}
+        port: ${{ secrets.SSH_PORT }}
+        script: |
+          rm -f "${{ github.event_name == 'push' && 'public_html/gamestoredev' || 'public_html/gamestore' }}/.maintenance"
+          rm -f "${{ github.event_name == 'push' && 'public_html/gamestoredev' || 'public_html/gamestore' }}/wpcontent.zip"
+          rm -f "${{ github.event_name == 'push' && 'public_html/gamestoredev' || 'public_html/gamestore' }}/wordpress.zip"
