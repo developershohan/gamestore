@@ -31,7 +31,7 @@ jobs:
           cd ..
           rm -rf temp
 
-      - name: Debug: Show current directory contents
+      - name: Show current directory contents
         run: ls -lh
 
       - name: Copy Zips to Server
