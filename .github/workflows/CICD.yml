@@ -83,7 +83,7 @@ jobs:
             rm -f "$DIR/wpcontent.zip"
             rm -f "$DIR/wordpress.zip"
 
-      - name: Debug: Confirm Files on Server
+      - name: Confirm Files on Server
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SSH_HOST }}
