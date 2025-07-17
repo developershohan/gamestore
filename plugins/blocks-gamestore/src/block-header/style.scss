@@ -1,12 +1,61 @@
-/**
- * The following styles get applied both on the front of your site
- * and in the editor.
- *
- * Replace them with your own styles or remove the file completely.
- */
+.wp-block-blocks-gamestore-block-header {
+	width: 100%;
+	background: var(--background-default, #fafafa);
+	color: var(--text-primary, #0e0d0f);
+	font-size: 14px;
+	font-weight: 700;
+	line-height: 1.4;
+	letter-spacing: 2.1px;
+	text-transform: uppercase;
 
-.wp-block-create-block-block-gamestore {
-	background-color: #21759b;
-	color: #fff;
-	padding: 2px;
+	a {
+		text-decoration: none;
+	}
+	.inner-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 0 32px;
+		height: 100px;
+
+		.wp-block-group {
+			display: flex;
+			gap: 48px;
+			align-items: center;
+
+			.wp-block-navigation {
+				margin-top: 0;
+			}
+		}
+		.right-section {
+			display: flex;
+			align-items: center;
+			justify-content: flex-end;
+			gap: 12px;
+
+			.header-search,
+			.header-mode-switcher {
+				cursor: pointer;
+			}
+
+			.header-member-link {
+				a {
+					display: flex;
+					height: 40px;
+					padding: 4px 20px;
+					box-sizing: border-box;
+					justify-content: center;
+					align-items: center;
+					border-radius: 5px;
+					border: 1px solid var(--divider-main, rgba(14, 13, 15, 0.08));
+					color: var(--text-primary, #0e0d0f);
+					font-size: 12px;
+					font-weight: 700;
+					line-height: 12px;
+					letter-spacing: 1.8px;
+					text-transform: uppercase;
+				}
+			}
+		}
+	}
 }

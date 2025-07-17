@@ -2,6 +2,16 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/block-contact/block.json":
+/*!**************************************!*\
+  !*** ./src/block-contact/block.json ***!
+  \**************************************/
+/***/ ((module) => {
+
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"blocks-gamestore/block-contact","version":"0.1.0","title":"Contact form","category":"widgets","icon":"smiley","description":"Example block scaffolded with Create Block tool.","example":{},"supports":{"html":false},"textdomain":"blocks-gamestore","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+
+/***/ }),
+
 /***/ "./src/block-contact/edit.js":
 /*!***********************************!*\
   !*** ./src/block-contact/edit.js ***!
@@ -57,6 +67,18 @@ function Edit() {
     children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Blocks Gamestore – hello from the editor!', 'blocks-gamestore')
   });
 }
+
+/***/ }),
+
+/***/ "./src/block-contact/editor.scss":
+/*!***************************************!*\
+  !*** ./src/block-contact/editor.scss ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
 
 /***/ }),
 
@@ -155,18 +177,6 @@ function save() {
 
 /***/ }),
 
-/***/ "./src/block-contact/editor.scss":
-/*!***************************************!*\
-  !*** ./src/block-contact/editor.scss ***!
-  \***************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
 /***/ "./src/block-contact/style.scss":
 /*!**************************************!*\
   !*** ./src/block-contact/style.scss ***!
@@ -176,16 +186,6 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
 
-
-/***/ }),
-
-/***/ "react/jsx-runtime":
-/*!**********************************!*\
-  !*** external "ReactJSXRuntime" ***!
-  \**********************************/
-/***/ ((module) => {
-
-module.exports = window["ReactJSXRuntime"];
 
 /***/ }),
 
@@ -219,13 +219,13 @@ module.exports = window["wp"]["i18n"];
 
 /***/ }),
 
-/***/ "./src/block-contact/block.json":
-/*!**************************************!*\
-  !*** ./src/block-contact/block.json ***!
-  \**************************************/
+/***/ "react/jsx-runtime":
+/*!**********************************!*\
+  !*** external "ReactJSXRuntime" ***!
+  \**********************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"blocks-gamestore/block-contact","version":"0.1.0","title":"Contact form","category":"widgets","icon":"smiley","description":"Example block scaffolded with Create Block tool.","example":{},"supports":{"html":false},"textdomain":"blocks-gamestore","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+module.exports = window["ReactJSXRuntime"];
 
 /***/ })
 

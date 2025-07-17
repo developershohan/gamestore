@@ -34,7 +34,7 @@ export default function Edit() {
 		<p { ...useBlockProps() }>
 			{ __(
 				'Block Gamestore – hello from the editor!',
-				'block-gamestore'
+				'blocks-gamestore'
 			) }
 		</p>
 	);

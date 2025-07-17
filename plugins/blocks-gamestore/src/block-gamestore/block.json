@@ -1,7 +1,7 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "block-gamestore/block-contact",
+	"name": "blocks-gamestore/block-contact",
 	"version": "0.1.0",
 	"title": "Block Contact",
 	"category": "widgets",
@@ -11,7 +11,7 @@
 	"supports": {
 		"html": false
 	},
-	"textdomain": "block-gamestore",
+	"textdomain": "blocks-gamestore",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
 	"style": "file:./style-index.css",

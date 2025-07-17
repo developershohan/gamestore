@@ -15,13 +15,12 @@
 		"start": "wp-scripts start"
 	},
 	"devDependencies": {
-<<<<<<< HEAD
+
 		"@wordpress/scripts": "^30.19.0"
 	},
 	"dependencies": {
-		"@wordpress/components": "^29.12.0"
-=======
+		"@wordpress/components": "^29.12.0",
 		"@wordpress/scripts": "^30.7.0"
->>>>>>> 3dff9552d4bdd27d5c9f1b4ad35afdb9540ba087
+
 	}
 }
