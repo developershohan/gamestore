@@ -1,23 +1,27 @@
 {
 	"name": "blocks-gamestore",
 	"version": "0.1.0",
-	"description": "Example blocks scaffolded with Create Block tool.",
+	"description": "Example block scaffolded with Create Block tool.",
 	"author": "The WordPress Contributors",
 	"license": "GPL-2.0-or-later",
 	"main": "build/index.js",
 	"scripts": {
-		"build": "wp-scripts build --blocks-manifest",
+		"build": "wp-scripts build",
 		"format": "wp-scripts format",
 		"lint:css": "wp-scripts lint-style",
 		"lint:js": "wp-scripts lint-js",
 		"packages-update": "wp-scripts packages-update",
 		"plugin-zip": "wp-scripts plugin-zip",
-		"start": "wp-scripts start --blocks-manifest"
+		"start": "wp-scripts start"
 	},
 	"devDependencies": {
+<<<<<<< HEAD
 		"@wordpress/scripts": "^30.19.0"
 	},
 	"dependencies": {
 		"@wordpress/components": "^29.12.0"
+=======
+		"@wordpress/scripts": "^30.7.0"
+>>>>>>> 3dff9552d4bdd27d5c9f1b4ad35afdb9540ba087
 	}
 }
