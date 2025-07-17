@@ -1,0 +1,37 @@
+name: GameStore Deploy
+
+on:
+  push:
+    branches:
+      - dev
+  release:
+    types: [published]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+
+      - name: Prepare Wordpress Zip
+        run: |
+          WP_LINK=$(cat wp-version.control.cfg)
+          wget $WP_LINK -O wordpress.zip
+
+      - name: Prepare plugins and theme Zip
+        run: zip -r wp.content.zip plugins mu-plugins themes
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
+
+      - name: Deploy
+        run: npm run deploy
