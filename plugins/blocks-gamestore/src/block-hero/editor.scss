@@ -1,9 +1,14 @@
-/**
- * The following styles get applied inside the editor only.
- *
- * Replace them with your own styles or remove the file completely.
- */
-
-.wp-block-create-block-blocks-gamestore {
-	border: 1px dotted #f00;
+.slide-item{
+	p{
+		font-weight: 700;
+		padding-top: 10px;
+	}
+	.image-box{
+		padding: 10px;
+		background-color: rgb(196, 196, 196);
+		margin-bottom: 20px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
 }

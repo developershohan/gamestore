@@ -42,28 +42,57 @@ const SlideItem = ({
   onImageChange,
   onRemove
 }) => {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-    className: "slide-item",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
-      children: "Light Version Logo"
-    }), slide.lightImage && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-      className: "image-box",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
-        src: slide.lightImage,
-        alt: "Slide image"
-      })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.MediaPlaceholder, {
-      icon: "format-image",
-      onSelect: media => onImageChange(media.url, index, "lightImage"),
-      onSelectURL: url => onImageChange(url, index, "lightImage"),
-      labels: {
-        title: "Slide Light Image",
-        instructions: "Upload an image for the slide."
-      },
-      accept: "image/*",
-      allowedTypes: ["image"],
-      multiple: false
-    })]
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      className: "slide-item",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+        children: "Light Version Logo"
+      }), slide.lightImage && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        className: "image-box",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+          src: slide.lightImage,
+          alt: "Slide image"
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.MediaPlaceholder, {
+        icon: "format-image",
+        onSelect: media => onImageChange(media.url, index, "lightImage"),
+        onSelectURL: url => onImageChange(url, index, "lightImage"),
+        labels: {
+          title: "Slide Light Image",
+          instructions: "Upload an image for the slide."
+        },
+        accept: "image/*",
+        allowedTypes: ["image"],
+        multiple: false
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+        children: "Dark Version Logo"
+      }), slide.darkImage && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        className: "image-box",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+          src: slide.darkImage,
+          alt: "Slide image"
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.MediaPlaceholder, {
+        icon: "format-image",
+        labels: {
+          title: "Slide Dark Image",
+          instructions: "Upload an image for the slide."
+        },
+        onSelect: media => onImageChange(media.url, index, "darkImage"),
+        onSelectURL: url => onImageChange(url, index, "darkImage"),
+        allowedTypes: ["image"],
+        multiple: false
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
+        isDestructive: true,
+        isSecondary: true,
+        onClick: onRemove,
+        style: {
+          marginTop: "10px",
+          marginLeft: "5px"
+        },
+        children: "Remove Video"
+      })]
+    })
   });
 };
 function Edit({
@@ -147,57 +176,39 @@ function Edit({
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.ToggleControl, {
           label: "Is Video",
           checked: isVideoUpload,
-          onChange: isVideoUpload => {
-            setIsVideoUpload(isVideoUpload);
+          onChange: value => {
+            setIsVideoUpload(value);
             setAttributes({
-              isVideo: isVideoUpload
+              isVideo: value,
+              video: "",
+              image: ""
             });
           }
-        }), isVideoUpload ? video && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("video", {
-            controls: true,
-            width: "100%",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("source", {
-              src: video,
-              type: "video/mp4"
-            })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
-            isDestructive: true,
-            isSecondary: true,
-            onClick: () => setAttributes({
-              video: ""
-            }),
-            style: {
-              marginTop: "10px",
-              marginLeft: "5px"
-            },
-            children: "Remove Video"
-          })]
-        }) : image && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
-            src: image,
-            alt: "Hero Image",
-            style: {
-              width: "100%"
-            }
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_1__.Button, {
-            isDestructive: true,
-            isSecondary: true,
-            onClick: () => setAttributes({
-              image: ""
-            }),
-            style: {
-              marginTop: "10px",
-              marginLeft: "5px"
-            },
-            children: "Remove Image"
-          })]
+        }), isVideoUpload ? video && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("video", {
+          controls: true,
+          width: "100%",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("source", {
+            src: video,
+            type: "video/mp4"
+          })
+        }) : image && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+          src: image,
+          alt: "Hero Image",
+          style: {
+            width: "100%"
+          }
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.MediaUpload, {
-          onSelect: media => isVideoUpload ? setAttributes({
-            video: media.url
-          }) : setAttributes({
-            image: media.url
-          }),
+          onSelect: media => {
+            if (isVideoUpload) {
+              setAttributes({
+                video: media.url
+              });
+            } else {
+              setAttributes({
+                image: media.url
+              });
+            }
+          },
           allowedTypes: isVideoUpload ? "video/*" : "image/*",
           render: ({
             open
@@ -222,12 +233,12 @@ function Edit({
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
       ...(0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useBlockProps)(),
-      children: [isVideoUpload ? video ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("video", {
+      children: [video && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("video", {
         className: "video-bg",
-        loop: true,
-        autoPlay: true,
+        loop: "loop",
+        autoplay: "",
         muted: true,
-        playsInline: true,
+        playsinline: true,
         width: "100%",
         height: "100%",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("source", {
@@ -235,36 +246,17 @@ function Edit({
           src: video,
           type: "video/mp4"
         })
-      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.MediaPlaceholder, {
-        icon: "format-video",
-        labels: {
-          title: "Upload Video"
-        },
-        accept: "video/*",
-        allowedTypes: ["video"],
-        onSelect: media => setAttributes({
-          video: media.url
-        })
-      }) : image ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+      }), image && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
         className: "image-bg",
         src: image,
         alt: "Background"
-      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.MediaPlaceholder, {
-        icon: "format-image",
-        labels: {
-          title: "Upload Image"
-        },
-        accept: "image/*",
-        allowedTypes: ["image"],
-        onSelect: media => setAttributes({
-          image: media.url
-        })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
         className: "hero-mask"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
         className: "hero-content",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.RichText, {
           tagName: "h1",
+          className: "hero-title",
           value: title,
           onChange: title => setAttributes({
             title
@@ -272,6 +264,7 @@ function Edit({
           placeholder: "Enter title"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.RichText, {
           tagName: "p",
+          className: "hero-description",
           value: description,
           onChange: description => setAttributes({
             description
@@ -374,8 +367,77 @@ __webpack_require__.r(__webpack_exports__);
 function save({
   attributes
 }) {
-  // const { title, description, link, linkAnchor, video } = attributes;
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {});
+  const {
+    title,
+    description,
+    link,
+    linkAnchor,
+    image,
+    video,
+    slides
+  } = attributes;
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+      ..._wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useBlockProps.save(),
+      children: [video && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("video", {
+        className: "video-bg",
+        loop: true,
+        autoPlay: true,
+        muted: true,
+        playsInline: true,
+        width: "100%",
+        height: "100%",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("source", {
+          className: "source-element",
+          src: video,
+          type: "video/mp4"
+        })
+      }), image && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
+        className: "image-bg",
+        src: image,
+        alt: "Background"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+        className: "hero-mask"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+        className: "hero-content",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.RichText.Content, {
+          tagName: "h1",
+          className: "hero-title",
+          value: title,
+          placeholder: "Enter title"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.RichText.Content, {
+          tagName: "p",
+          className: "hero-description",
+          value: description,
+          placeholder: "Enter description"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
+          href: link,
+          className: "hero-button",
+          children: linkAnchor || "Learn More"
+        })]
+      }), slides && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+        className: "hero-slider",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+          className: "slider-container",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+            className: "swipper-wrapper",
+            children: slides.map((slide, index) => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+              className: "swiper-slide slide-item",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
+                src: slide.lightImage,
+                alt: "Logo",
+                className: "light-logo"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
+                src: slide.darkImage,
+                alt: "Logo",
+                className: "dark-logo"
+              })]
+            }, index))
+          })
+        })
+      })]
+    })
+  });
 }
 
 /***/ }),

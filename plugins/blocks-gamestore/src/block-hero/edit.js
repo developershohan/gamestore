@@ -17,26 +17,54 @@ import "./editor.scss";
 
 const SlideItem = ({ index, slide, onImageChange, onRemove }) => {
 	return (
-		<div className="slide-item">
-			<p>Light Version Logo</p>
-			{slide.lightImage && (
-				<div className="image-box">
-					<img src={slide.lightImage} alt="Slide image" />
-				</div>
-			)}
-			<MediaPlaceholder
-				icon="format-image"
-				onSelect={(media) => onImageChange(media.url, index, "lightImage")}
-				onSelectURL={(url) => onImageChange(url, index, "lightImage")}
-				labels={{
-					title: "Slide Light Image",
-					instructions: "Upload an image for the slide.",
-				}}
-				accept="image/*"
-				allowedTypes={["image"]}
-				multiple={false}
-			/>
-		</div>
+		<>
+			<div className="slide-item">
+				<p>Light Version Logo</p>
+				{slide.lightImage && (
+					<div className="image-box">
+						<img src={slide.lightImage} alt="Slide image" />
+					</div>
+				)}
+				<MediaPlaceholder
+					icon="format-image"
+					onSelect={(media) => onImageChange(media.url, index, "lightImage")}
+					onSelectURL={(url) => onImageChange(url, index, "lightImage")}
+					labels={{
+						title: "Slide Light Image",
+						instructions: "Upload an image for the slide.",
+					}}
+					accept="image/*"
+					allowedTypes={["image"]}
+					multiple={false}
+				/>
+				<p>Dark Version Logo</p>
+				{slide.darkImage && (
+					<div className="image-box">
+						<img src={slide.darkImage} alt="Slide image" />
+					</div>
+				)}
+				<MediaPlaceholder
+					icon="format-image"
+					labels={{
+						title: "Slide Dark Image",
+						instructions: "Upload an image for the slide.",
+					}}
+					onSelect={(media) => onImageChange(media.url, index, "darkImage")}
+					onSelectURL={(url) => onImageChange(url, index, "darkImage")}
+					allowedTypes={["image"]}
+					multiple={false}
+				></MediaPlaceholder>
+				{/* <p onClick={removeSlide}>remove</p> */}
+				<Button
+					isDestructive
+					isSecondary
+					onClick={onRemove}
+					style={{ marginTop: "10px", marginLeft: "5px" }}
+				>
+					Remove Video
+				</Button>
+			</div>
+		</>
 	);
 };
 
@@ -107,47 +135,29 @@ export default function Edit({ attributes, setAttributes }) {
 					<ToggleControl
 						label="Is Video"
 						checked={isVideoUpload}
-						onChange={(isVideoUpload) => {
-							setIsVideoUpload(isVideoUpload);
-							setAttributes({ isVideo: isVideoUpload });
+						onChange={(value) => {
+							setIsVideoUpload(value);
+							setAttributes({ isVideo: value, video:"",image:"" });
 						}}
 					/>
 					{isVideoUpload
 						? video && (
-								<>
-									<video controls width="100%">
-										<source src={video} type="video/mp4" />
-									</video>
-									<Button
-										isDestructive
-										isSecondary
-										onClick={() => setAttributes({ video: "" })}
-										style={{ marginTop: "10px", marginLeft: "5px" }}
-									>
-										Remove Video
-									</Button>
-								</>
+								<video controls width="100%">
+									<source src={video} type="video/mp4" />
+								</video>
 						  )
 						: image && (
-								<>
-									<img src={image} alt="Hero Image" style={{ width: "100%" }} />
-									<Button
-										isDestructive
-										isSecondary
-										onClick={() => setAttributes({ image: "" })}
-										style={{ marginTop: "10px", marginLeft: "5px" }}
-									>
-										Remove Image
-									</Button>
-								</>
+								<img src={image} alt="Hero Image" style={{ width: "100%" }} />
 						  )}
 
 					<MediaUpload
-						onSelect={(media) =>
-							isVideoUpload
-								? setAttributes({ video: media.url })
-								: setAttributes({ image: media.url })
-						}
+						onSelect={(media) => {
+							if (isVideoUpload) {
+								setAttributes({ video: media.url });
+							} else {
+								setAttributes({ image: media.url });
+							}
+						}}
 						allowedTypes={isVideoUpload ? "video/*" : "image/*"}
 						render={({ open }) => (
 							<Button onClick={open} className="is-secondary">
@@ -173,50 +183,33 @@ export default function Edit({ attributes, setAttributes }) {
 			</InspectorControls>
 
 			<div {...useBlockProps()}>
-				{isVideoUpload ? (
-					video ? (
-						<video
-							className="video-bg"
-							loop
-							autoPlay
-							muted
-							playsInline
-							width="100%"
-							height="100%"
-						>
-							<source className="source-element" src={video} type="video/mp4" />
-						</video>
-					) : (
-						<MediaPlaceholder
-							icon="format-video"
-							labels={{ title: "Upload Video" }}
-							accept="video/*"
-							allowedTypes={["video"]}
-							onSelect={(media) => setAttributes({ video: media.url })}
-						/>
-					)
-				) : image ? (
-					<img className="image-bg" src={image} alt="Background" />
-				) : (
-					<MediaPlaceholder
-						icon="format-image"
-						labels={{ title: "Upload Image" }}
-						accept="image/*"
-						allowedTypes={["image"]}
-						onSelect={(media) => setAttributes({ image: media.url })}
-					/>
+				{video && (
+					<video
+						className="video-bg"
+						loop="loop"
+						autoplay=""
+						muted
+						playsinline
+						width="100%"
+						height="100%"
+					>
+						<source className="source-element" src={video} type="video/mp4" />
+					</video>
 				)}
+				{image && <img className="image-bg" src={image} alt="Background" />}
 
 				<div className="hero-mask"></div>
 				<div className="hero-content">
 					<RichText
 						tagName="h1"
+						className="hero-title"
 						value={title}
 						onChange={(title) => setAttributes({ title })}
 						placeholder="Enter title"
 					/>
 					<RichText
 						tagName="p"
+						className="hero-description"
 						value={description}
 						onChange={(description) => setAttributes({ description })}
 						placeholder="Enter description"
