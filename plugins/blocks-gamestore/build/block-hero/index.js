@@ -272,7 +272,7 @@ function Edit({
           placeholder: "Enter description"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("a", {
           href: link,
-          className: "hero-button",
+          className: "hero-button shadow",
           children: linkAnchor || "Learn More"
         })]
       })]
@@ -412,7 +412,7 @@ function save({
           placeholder: "Enter description"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
           href: link,
-          className: "hero-button",
+          className: "hero-button shadow",
           children: linkAnchor || "Learn More"
         })]
       }), slides && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {

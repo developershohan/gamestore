@@ -214,7 +214,7 @@ export default function Edit({ attributes, setAttributes }) {
 						onChange={(description) => setAttributes({ description })}
 						placeholder="Enter description"
 					/>
-					<a href={link} className="hero-button">
+					<a href={link} className="hero-button shadow">
 						{linkAnchor || "Learn More"}
 					</a>
 				</div>
