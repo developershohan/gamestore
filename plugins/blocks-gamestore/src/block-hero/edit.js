@@ -137,7 +137,7 @@ export default function Edit({ attributes, setAttributes }) {
 						checked={isVideoUpload}
 						onChange={(value) => {
 							setIsVideoUpload(value);
-							setAttributes({ isVideo: value, video:"",image:"" });
+							setAttributes({ isVideo: value, video: "", image: "" });
 						}}
 					/>
 					{isVideoUpload
@@ -218,6 +218,28 @@ export default function Edit({ attributes, setAttributes }) {
 						{linkAnchor || "Learn More"}
 					</a>
 				</div>
+				{slides && (
+					<div className="hero-slider">
+						<div className="slider-container swiper">
+							<div className="swiper-wrapper">
+								{slides.map((slide, index) => (
+									<div key={index} className="swiper-slide slide-item">
+										<img
+											src={slide.lightImage}
+											alt="Logo"
+											className="light-logo"
+										/>
+										<img
+											src={slide.darkImage}
+											alt="Logo"
+											className="dark-logo"
+										/>
+									</div>
+								))}
+							</div>
+						</div>
+					</div>
+				)}
 			</div>
 		</>
 	);

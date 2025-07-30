@@ -14,7 +14,7 @@ body .is-layout-constrained .wp-block-blocks-gamestore-block-hero {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100vh;
+  width: 100vw;
   height: 980px;
   -o-object-fit: cover;
      object-fit: cover;
@@ -66,13 +66,17 @@ body .is-layout-constrained .wp-block-blocks-gamestore-block-hero {
   align-items: center;
   gap: 48px;
 }
-.wp-block-blocks-gamestore-block-hero .hero-slider .slide-item {
+.wp-block-blocks-gamestore-block-hero .hero-slider .swiper-wrapper {
   display: flex;
   width: 1540px;
   justify-content: space-between;
   align-items: center;
 }
-.wp-block-blocks-gamestore-block-hero .hero-slider .slide-item .dark-logo {
+.wp-block-blocks-gamestore-block-hero .hero-slider .swiper-wrapper .slide-item {
+  width: -moz-fit-content !important;
+  width: fit-content !important;
+}
+.wp-block-blocks-gamestore-block-hero .hero-slider .swiper-wrapper .slide-item .dark-logo {
   display: none;
 }
 

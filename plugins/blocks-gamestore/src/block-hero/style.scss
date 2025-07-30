@@ -12,7 +12,7 @@ body .is-layout-constrained .wp-block-blocks-gamestore-block-hero {
 		position: absolute;
 		top: 0;
 		left: 0;
-		width: 100vh;
+		width: 100vw;
 		height: 980px;
 		object-fit: cover;
 		z-index: 0;
@@ -68,14 +68,19 @@ body .is-layout-constrained .wp-block-blocks-gamestore-block-hero {
 		align-items: center;
 		gap: 48px;
 
-		.slide-item {
+		.swiper-wrapper {
 			display: flex;
 			width: 1540px;
 			justify-content: space-between;
 			align-items: center;
+			// position: relative;
 
-			.dark-logo {
-				display: none;
+			.slide-item {
+				width: fit-content !important;
+
+				.dark-logo {
+					display: none;
+				}
 			}
 		}
 	}

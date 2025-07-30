@@ -41,8 +41,8 @@ export default function save({ attributes }) {
 				</div>
 				{slides && (
 					<div className="hero-slider">
-						<div className="slider-container">
-							<div className="swipper-wrapper">
+						<div className="slider-container swiper">
+							<div className="swiper-wrapper">
 								{slides.map((slide, index) => (
 									<div key={index} className="swiper-slide slide-item">
 										<img
