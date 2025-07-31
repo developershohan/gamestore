@@ -17,8 +17,9 @@
 if (! defined('ABSPATH')) {
 	exit; // Exit if accessed directly.
 }
- define('BLOCKS_GAMESTORE_PLUGIN_PATH', plugin_dir_path(__FILE__));
+define('BLOCKS_GAMESTORE_PLUGIN_PATH', plugin_dir_path(__FILE__));
 require_once(BLOCKS_GAMESTORE_PLUGIN_PATH . 'blocks.php');
+
 add_filter('block_categories_all', function ($categories) {
 	return array_merge($categories, [
 		[
