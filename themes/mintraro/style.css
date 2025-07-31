@@ -1,0 +1,252 @@
+/*
+Theme Name: Mintraro
+Theme URI: https://effethemes.com/themes/mintraro-WordPress-theme/
+Author: Effe Themes
+Author URI: https://effethemes.com/
+Description: Mintraro is a dark WordPress Block Theme crafted for bold agencies, creative studios, and digital pioneers who demand elegance with edge. Featuring a fully immersive layout with smooth gradients, glowing highlights, and modern typographic rhythm, Mintraro brings sophistication to every scroll. Built for Full Site Editing, it includes responsive block patterns, customizable sections, and fluid layouts that adapt beautifully across devices. Whether you're launching a portfolio, agency site, or digital product, Mintraro gives you the freedom to build stunning web experiences with clarity, impact, and style. Demo: https://effethemes.com/themes/mintraro-wordpress-theme
+Requires at least: 6.6
+Tested up to: 6.6
+Requires PHP: 5.7
+Version: 1.0.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: mintraro
+Tags: blog, portfolio, block-styles, e-commerce, full-site-editing, two-columns, full-width-template, custom-logo, custom-menu, custom-background, editor-style, block-patterns, custom-header, translation-ready, template-editing
+*/
+
+/* ================= > General Styles < ================= */
+
+html,
+body {
+  overflow-x: hidden;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--wp--preset--color--custom-background-primary);
+  color: var(--wp--preset--color--custom-text-color);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+a {
+  color: inherit;
+  -webkit-transition: all 0.25s ease-in-out;
+  -o-transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+ul > li > a {
+  text-decoration: none;
+}
+
+ul > li > a:hover {
+  color: var(--wp--preset--color--custom-primary) !important;
+}
+
+:where(.wp-site-blocks) > * {
+  -webkit-margin-before: 0;
+          margin-block-start: 0;
+}
+
+.is-style-outline > a {
+  background: transparent !important;
+}
+
+.wp-block-search.wp-block-search__button-only .wp-block-search__button {
+  display: block !important;
+}
+
+.full-width-image,
+.full-width-image > img {
+  width: 100% !important;
+}
+
+/* ================= > Popup < ================= */
+
+.mintraro-fixed-message {
+  position: fixed;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  background: var(--wp--preset--color--custom-primary) !important;
+  padding: 20px 20px;
+  z-index: 1000;
+  word-wrap: break-word;
+  max-height: 70% !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mintraro-fixed-message a {
+  color: #fff;
+  writing-mode: vertical-rl;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+  word-wrap: break-word;
+  max-height: 70% !important;
+}
+
+/* ================= > Header < ================= */
+
+.wp-block-site-title > a {
+  text-decoration: none;
+}
+
+.wp-block-site-title > a:hover {
+  color: var(--wp--preset--color--custom-primary) !important;
+}
+
+.wp-block-navigation-item:hover {
+  color: var(--wp--preset--color--custom-primary) !important;
+}
+
+.wp-block-navigation__responsive-container-content {
+  -webkit-box-align: start !important;
+      -ms-flex-align: start !important;
+          align-items: start !important;
+}
+
+.wp-block-navigation:not(.has-background) .wp-block-navigation__submenu-container {
+  border: 0 !important;
+}
+
+.wp-block-navigation-submenu > li {
+  background: var(--wp--preset--color--custom-background-secondary) !important;
+  color: var(--wp--preset--color--custom-text-color);
+}
+
+.header-search-icon > div > button {
+  background: transparent;
+  padding: 0;
+}
+
+/* ================= > Hero < ================= */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  transform: translateX(-50%) rotate(-10deg);
+  width: 250%;
+  height: 100px;
+  background: radial-gradient(
+    ellipse 70% 150% at 50% 50%,
+    rgba(255, 111, 97, 0.25) 0%,
+    rgba(255, 111, 97, 0.1) 50%,
+    rgba(132, 94, 194, 0.05) 80%,
+    transparent 100%
+  );
+  filter: blur(60px);
+  z-index: 2;
+  pointer-events: none;
+}
+
+
+.hero-content {
+  position: relative;
+  z-index: 3;
+}
+
+/* ================= > Blog < ================= */
+
+.wp-block-post-title > a:hover {
+  color: var(--wp--preset--color--custom-primary) !important;
+}
+
+.wp-block-button__link,
+.wp-block-search__button {
+  background: var(--wp--preset--color--custom-primary);
+  -webkit-transition: all 0.25s ease-in-out;
+  -o-transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
+}
+
+.wp-block-button__link:hover,
+.wp-block-search__button:hover {
+  opacity: 0.8;
+}
+
+input,
+textarea {
+  background: var(--wp--preset--color--custom-background-secondary);
+  color: #fff !important;
+}
+
+/* ================= > Footer < ================= */
+
+.copy > a {
+  text-decoration: none;
+}
+
+.copy > a:hover {
+  opacity: 0.8;
+}
+
+/* ================= > Media Queries < ================= */
+
+@media (max-width: 1024px) {
+  .wp-block-columns {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+
+  .hero-cta-buttons {
+    justify-self: baseline;
+  }
+
+  .hero-content > div {
+    max-width: max-content !important;
+  }
+
+}
+
+@media (max-width: 992px) {
+  .wp-block-navigation__responsive-container:not(.hidden-by-default):not(.is-menu-open) .wp-block-navigation__responsive-container-close,
+  .wp-block-navigation__responsive-container-open:not(.always-shown),
+  .wp-block-navigation__responsive-container:not(.hidden-by-default):not(.is-menu-open) {
+    display: none;
+  }
+
+  .wp-block-navigation__responsive-container-open:not(.always-shown) {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+
+  .wp-block-navigation__container {
+    --navigation-layout-justification-setting: flex-start !important;
+    --navigation-layout-justify: flex-start !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .wp-block-buttons {
+    flex-direction: column;
+  }
+}
