@@ -78,6 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
   closeButton.addEventListener("click", function () {
     searchContainer.style.display = "none";
     searchResult.innerHTML = "";
+    searchItem =""
   });
 
   function showPlaceholders() {

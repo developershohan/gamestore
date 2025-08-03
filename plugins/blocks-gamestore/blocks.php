@@ -23,9 +23,9 @@ function view_block_games_line()
                 $product = wc_get_product(get_the_ID());
 
             ?>
-            <div class="product">
-                <?php echo $product->get_image(); ?>
-            </div>
+                <div class="product">
+                    <?php echo $product->get_image(); ?>
+                </div>
         </div>
 <?php
             endwhile;
@@ -33,9 +33,21 @@ function view_block_games_line()
         wp_reset_postdata();
         return ob_get_clean();
     }
+    function view_block_subscribe($attributes)
+    {
+        $bgImage = (isset($attributes["bgImage"])) ? 'style="background-image: url(' . $attributes["bgImage"] . ')"'  : "";
 
 
+        ob_start();
+?>
+<div <?php echo get_block_wrapper_attributes(array('class' => 'alignfull')) ?> <?php echo $bgImage  ?>>
+    <div class="subscribe-inner  wrapper">
+        <h2 class="subscribe-title"><?php echo $attributes['title'] ?></h2>
+        <p class="subscribe-description"> <?php echo $attributes['description'] ?></p>
+        <div class="subscribe-shortcode"> <?php echo do_shortcode($attributes['shortcode']) ?> </div>
+    </div>
+</div>
+<?php
 
-
-
-    
+        return ob_get_clean();
+    }

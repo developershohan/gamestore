@@ -1,0 +1,1 @@
+{"version":3,"file":"block-subscribe/style-index.css","mappings":";;;AACA;EACC;EACA;EACA;AAAD,C","sources":["webpack://blocks-gamestore/./src/block-subscribe/style.scss"],"sourcesContent":["\r\n.wp-block-create-block-blocks-gamestore {\r\n\tbackground-color: #21759b;\r\n\tcolor: #fff;\r\n\tpadding: 2px;\r\n}\r\n"],"names":[],"sourceRoot":""}
