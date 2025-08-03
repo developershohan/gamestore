@@ -1,8 +1,7 @@
 import { useBlockProps, RichText } from "@wordpress/block-editor";
 
 export default function save({ attributes }) {
-	const { title, description, link, linkAnchor, image, video, slides } =
-		attributes;
+	const { title, description, link, linkAnchor, image, video, slides } = attributes;
 	return (
 		<>
 			<div {...useBlockProps.save()}>
