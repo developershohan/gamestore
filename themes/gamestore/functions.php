@@ -5,6 +5,10 @@ function gamestore_styles()
 	wp_enqueue_style('gamestore-general', get_template_directory_uri() . '/assets/css/gamestore.css', [],	wp_get_theme()->get('Version'));
 	wp_enqueue_script('gamestore-theme-related', get_template_directory_uri() . '/assets/js/gamestore-theme-related.js', [], wp_get_theme()->get('Version'), true);
 
+	wp_localize_script( 'gamestore-theme-related', 'gamestore_params', [
+		'ajaxurl' => admin_url('admin-ajax.php'),
+	] );
+
 	// swiper js
 	wp_enqueue_style('swiper-bundle', get_template_directory_uri() . '/assets/css/swiper-bundle.min.css', [],	wp_get_theme()->get('Version'));
 	wp_enqueue_script('swiper-bundle', get_template_directory_uri() . '/assets/js/swiper-bundle.min.js', [], wp_get_theme()->get('Version'), true);

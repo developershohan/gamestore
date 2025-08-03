@@ -22,3 +22,74 @@ function gamestore_footer_search_popup()
 }
 
 add_action("wp_footer", "gamestore_footer_search_popup");
+
+function load_latest_games()
+{
+    $args = array(
+        "post_type" => "product",
+        "posts_per_page" => 12,
+        'post_status' => 'publish',
+        'orderby' => 'date',
+        'order' => 'DESC',
+    );
+
+    $results = [];
+    $games_query = new WP_Query($args);
+
+    if ($games_query->have_posts()) {
+        while ($games_query->have_posts()) {
+            $games_query->the_post();
+            $product = wc_get_product(get_the_ID());
+
+            $results[] = [
+                'link' => get_permalink(),
+                'thumbnail' => $product->get_image('woocommerce_thumbnail'), // or 'full'
+                'price' => $product->get_price_html(),
+                'title' => get_the_title(),
+            ];
+        }
+    }
+
+    wp_reset_postdata();
+    wp_send_json_success($results);
+}
+
+add_action("wp_ajax_load_latest_games", "load_latest_games");
+add_action("wp_ajax_nopriv_load_latest_games", "load_latest_games");
+
+function search_game_by_title()
+{
+
+    $search_term = isset($_POST["search"]) ? sanitize_text_field($_POST["search"]) : "";
+    
+    $args = array(
+        "post_type" => "product",
+        "posts_per_page" => -1,
+        'post_status' => 'publish',
+        'orderby' => 'date',
+        's' => $search_term
+    );
+
+    $results = [];
+    $games_query = new WP_Query($args);
+
+    if ($games_query->have_posts()) {
+        while ($games_query->have_posts()) {
+            $games_query->the_post();
+            $product = wc_get_product(get_the_ID());
+
+            $results[] = [
+                'link' => get_permalink(),
+                'thumbnail' => $product->get_image('woocommerce_thumbnail'),
+                'price' => $product->get_price_html(),
+                'title' => get_the_title(),
+            ];
+        }
+    }
+
+    wp_reset_postdata();
+    wp_send_json_success($results);
+}
+
+add_action("wp_ajax_search_game_by_title", "search_game_by_title");
+add_action("wp_ajax_nopriv_search_game_by_title", "search_game_by_title");
