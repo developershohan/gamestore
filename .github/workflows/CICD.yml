@@ -1,9 +1,10 @@
 name: GameStore Deploy
 
+# Triggers the workflow on a push to the 'main' branch or when a release is published
 on:
   push:
     branches:
-      - dev
+      - main
   release:
     types: [published]
 
@@ -11,21 +12,23 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    env:
-      DEPLOY_PATH: ${{ github.event_name == 'push' && 'public_html/gamestoredev' || 'public_html/gamestore' }}
-
     steps:
+      # Step 1: Check out the repository code
       - name: Checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@v4
 
+      # Step 2: Download the specified WordPress version
       - name: Prepare WordPress Zip
         run: |
           WP_LINK=$(cat wp-version-control.cfg)
           wget -O "./wordpress.zip" $WP_LINK
 
+      # Step 3: Create a zip file of the theme and plugins
       - name: Prepare plugins and theme zip
         run: zip -r wpcontent.zip plugins mu-plugins themes
 
+      # Step 4: Copy the zip files to the server
+      # Note: Uses the full absolute path for the target directory
       - name: Copy Zips to Server
         uses: appleboy/scp-action@master
         with:
@@ -34,8 +37,9 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
           port: ${{ secrets.SSH_PORT }}
           source: "./wordpress.zip, ./wpcontent.zip"
-          target: "${{ env.DEPLOY_PATH }}"
+          target: /home/u714669472/domains/proshohan.com/${{ github.event_name == 'push' && 'public_html/gamestoredev' || 'public_html/gamestore' }}
 
+      # Step 5: Put the site into maintenance mode before making changes
       - name: Enable Maintenance Mode
         uses: appleboy/scp-action@master
         with:
@@ -44,8 +48,9 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
           port: ${{ secrets.SSH_PORT }}
           source: ".maintenance"
-          target: "${{ env.DEPLOY_PATH }}"
+          target: /home/u714669472/domains/proshohan.com/${{ github.event_name == 'push' && 'public_html/gamestoredev' || 'public_html/gamestore' }}
 
+      # Step 6: Update WordPress core files on the server
       - name: Update WordPress Core
         uses: appleboy/ssh-action@v1.0.3
         with:
@@ -54,12 +59,19 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            find "${DEPLOY_PATH}" -type f -name "*.php" ! -name "wp-config.php" -delete
-            rm -r "${DEPLOY_PATH}/wp-admin/" "${DEPLOY_PATH}/wp-includes/"
-            unzip -o "${DEPLOY_PATH}/wordpress.zip" -d "${DEPLOY_PATH}/"
-            mv "${DEPLOY_PATH}/wordpress"/* "${DEPLOY_PATH}/"
-            rm -r "${DEPLOY_PATH}/wordpress"
+            # Set the full path to the target directory
+            TARGET_DIR="/home/u714669472/domains/proshohan.com/${{ github.event_name == 'push' && 'public_html/gamestoredev' || 'public_html/gamestore' }}"
+            
+            # Delete old core files, except wp-config.php
+            find "$TARGET_DIR" -type f -name "*.php" ! -name "wp-config.php" -delete
+            rm -rf "$TARGET_DIR/wp-admin/" "$TARGET_DIR/wp-includes/"
+            
+            # Unzip new WordPress core
+            unzip -o "$TARGET_DIR/wordpress.zip" -d "$TARGET_DIR/"
+            mv "$TARGET_DIR/wordpress"/* "$TARGET_DIR/"
+            rm -r "$TARGET_DIR/wordpress"
 
+      # Step 7: Update plugins and themes on the server
       - name: Update Plugins and Theme
         uses: appleboy/ssh-action@v1.0.3
         with:
@@ -68,9 +80,16 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            rm -rf "${DEPLOY_PATH}/wp-content/plugins" "${DEPLOY_PATH}/wp-content/mu-plugins" "${DEPLOY_PATH}/wp-content/themes"
-            unzip -o "${DEPLOY_PATH}/wpcontent.zip" -d "${DEPLOY_PATH}/wp-content/"
+            # Set the full path to the target directory
+            TARGET_DIR="/home/u714669472/domains/proshohan.com/${{ github.event_name == 'push' && 'public_html/gamestoredev' || 'public_html/gamestore' }}"
+            
+            # Remove old directories
+            rm -rf "$TARGET_DIR/wp-content/plugins" "$TARGET_DIR/wp-content/mu-plugins" "$TARGET_DIR/wp-content/themes"
+            
+            # Unzip new content
+            unzip -o "$TARGET_DIR/wpcontent.zip" -d "$TARGET_DIR/wp-content/"
 
+      # Step 8: Disable maintenance mode and clean up the zip files
       - name: Disable Maintenance Mode and Remove zips
         uses: appleboy/ssh-action@v1.0.3
         with:
@@ -79,6 +98,10 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            rm -f "${DEPLOY_PATH}/.maintenance"
-            rm -f "${DEPLOY_PATH}/wpcontent.zip"
-            rm -f "${DEPLOY_PATH}/wordpress.zip"
+            # Set the full path to the target directory
+            TARGET_DIR="/home/u714669472/domains/proshohan.com/${{ github.event_name == 'push' && 'public_html/gamestoredev' || 'public_html/gamestore' }}"
+
+            # Clean up
+            rm -f "$TARGET_DIR/.maintenance"
+            rm -f "$TARGET_DIR/wpcontent.zip"
+            rm -f "$TARGET_DIR/wordpress.zip"
