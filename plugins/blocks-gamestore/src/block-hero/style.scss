@@ -17,6 +17,15 @@ body .is-layout-constrained .wp-block-blocks-gamestore-block-hero {
 		object-fit: cover;
 		z-index: 0;
 	}
+	.image-bg {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 980px;
+		object-fit: cover;
+		z-index: 0;
+	}
 	.hero-mask {
 		width: 80%;
 		height: 100%;

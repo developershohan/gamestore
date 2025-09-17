@@ -19,6 +19,17 @@
 	);
 	--text-secondary: rgba(14, 13, 15, 0.7);
 }
+.wp-block-blocks-gamestore-block-hero{
+		.image-bg {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 980px;
+		object-fit: cover;
+		z-index: 0;
+	}
+}
 .hero-button {
 	display: flex;
 	padding: 20px 32px;

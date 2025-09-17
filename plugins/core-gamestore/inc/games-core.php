@@ -1,7 +1,5 @@
 <?php
 
-
-
 function gamestore_footer_search_popup()
 {
 ?>
@@ -61,7 +59,7 @@ function search_game_by_title()
 {
 
     $search_term = isset($_POST["search"]) ? sanitize_text_field($_POST["search"]) : "";
-    
+
     $args = array(
         "post_type" => "product",
         "posts_per_page" => -1,
@@ -93,3 +91,50 @@ function search_game_by_title()
 
 add_action("wp_ajax_search_game_by_title", "search_game_by_title");
 add_action("wp_ajax_nopriv_search_game_by_title", "search_game_by_title");
+
+
+function register_product_rest_endpoint()
+{
+    register_rest_route('blocks-gamestore/v1', '/products/', array(
+        'methods' => 'GET',
+        'callback' => 'get_product_list',
+        'args' => array(
+            'count' => array(
+                'validate_callback' => function ($param, $request, $key) {
+                    return is_numeric($param);
+                }
+            ),
+        ),
+    ));
+}
+add_action('rest_api_init', 'register_product_rest_endpoint');
+
+// Callback function for fetching products
+function get_product_list(WP_REST_Request $request)
+{
+    $count = $request->get_param('count') ? $request->get_param('count') : 12;
+
+    $args = array(
+        'post_type' => 'product',
+        'posts_per_page' => $count,
+        'orderby' => 'date',
+        'order' => 'DESC',
+    );
+
+    $query = new WP_Query($args);
+
+    $products = array();
+
+    while ($query->have_posts()) {
+        $query->the_post();
+        $products[] = array(
+            'url' => get_the_permalink(),            'id' => get_the_ID(),
+            'title' => get_the_title(),
+            'image' => get_the_post_thumbnail_url(get_the_ID(), 'full'),
+        );
+    }
+
+    wp_reset_postdata();
+
+    return rest_ensure_response($products);
+}
