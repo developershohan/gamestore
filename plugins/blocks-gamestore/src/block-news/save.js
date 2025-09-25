@@ -7,13 +7,15 @@ export default function save({ attributes }) {
 		<>
 			<div {...useBlockProps.save()}>
 				<RichText.Content
-					tagName="h1"
+					tagName="h2"
 					value={title}
+					className="title"
 					placeholder="Enter title"
 				/>
 				<RichText.Content
 					tagName="p"
 					value={description}
+					className="description"
 					placeholder={"Heading..."}
 				/>
 

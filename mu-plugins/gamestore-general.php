@@ -46,28 +46,28 @@ add_action('admin_head', 'gamestore_fix_svg');
 
 
 
-// Registering Custom Post Type Themes
+// Registering Custom Post Type News
 add_action( 'init', 'register_news_post', 20 );
 function register_news_post() {
     $labels = array(
-        'name' => _x( 'Themes', 'my_custom_post','custom' ),
-        'singular_name' => _x( 'Theme', 'my_custom_post', 'custom' ),
+        'name' => _x( 'News', 'my_custom_post','custom' ),
+        'singular_name' => _x( 'News', 'my_custom_post', 'custom' ),
         'add_new' => _x( 'Add New', 'my_custom_post', 'custom' ),
-        'add_new_item' => _x( 'Add New ThemePost', 'my_custom_post', 'custom' ),
-        'edit_item' => _x( 'Edit ThemePost', 'my_custom_post', 'custom' ),
-        'new_item' => _x( 'New ThemePost', 'my_custom_post', 'custom' ),
-        'view_item' => _x( 'View ThemePost', 'my_custom_post', 'custom' ),
+        'add_new_item' => _x( 'Add New News Post', 'my_custom_post', 'custom' ),
+        'edit_item' => _x( 'Edit News Post', 'my_custom_post', 'custom' ),
+        'new_item' => _x( 'New News Post', 'my_custom_post', 'custom' ),
+        'view_item' => _x( 'View News Post', 'my_custom_post', 'custom' ),
         'search_items' => _x( 'Search ThemePosts', 'my_custom_post', 'custom' ),
         'not_found' => _x( 'No ThemePosts found', 'my_custom_post', 'custom' ),
         'not_found_in_trash' => _x( 'No ThemePosts found in Trash', 'my_custom_post', 'custom' ),
-        'parent_item_colon' => _x( 'Parent ThemePost:', 'my_custom_post', 'custom' ),
-        'menu_name' => _x( 'Themes Posts', 'my_custom_post', 'custom' ),
+        'parent_item_colon' => _x( 'Parent News Post:', 'my_custom_post', 'custom' ),
+        'menu_name' => _x( 'News Posts', 'my_custom_post', 'custom' ),
     );
 
     $args = array(
         'labels' => $labels,
         'hierarchical' => true,
-        'description' => 'Custom Theme Posts',
+        'description' => 'Custom News Posts',
         'supports' => array( 'title', 'editor', 'excerpt', 'author', 'thumbnail', 'comments', 'revisions', 'post-formats', 'custom-fields' ),
         'taxonomies' => array( 'post_tag','themes_categories'),
         'show_ui' => true,
@@ -79,22 +79,14 @@ function register_news_post() {
         'query_var' => true,
         'can_export' => true,
         'public' => true,
-        'has_archive' => 'themes',
+        'has_archive' => 'news',
         'capability_type' => 'post',
 
     );
-    register_post_type( 'themes', $args ); 
+    register_post_type( 'news', $args ); 
 
     
 }
-
-/*
-* Plugin Name: Course Taxonomy
-* Description: A short example showing how to add a taxonomy called Course.
-* Version: 1.0
-* Author: developer.wordpress.org
-* Author URI: https://codex.wordpress.org/User:Aternus
-*/
 
 function wporg_register_taxonomy_course() {
 	 $labels = array(
@@ -118,6 +110,6 @@ function wporg_register_taxonomy_course() {
 		 'query_var'         => true,
 		 'rewrite'           => [ 'slug' => 'course' ],
 	 );
-	 register_taxonomy( 'course', [ 'themes' ], $args );
+	 register_taxonomy( 'course', [ 'news' ], $args );
 }
 add_action( 'init', 'wporg_register_taxonomy_course' );

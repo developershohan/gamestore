@@ -1,6 +1,126 @@
+body .is-layout-constrained .wp-block-blocks-gamestore-block-news {
+	max-width: 100vw;
+}
 
-.wp-block-create-block-blocks-gamestore {
-	background-color: #21759b;
-	color: #fff;
-	padding: 2px;
+.wp-block-blocks-gamestore-block-news {
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 24px;
+	justify-content: center;
+
+	&::before {
+		position: absolute;
+		content: "";
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		background: linear-gradient(
+			180deg,
+			var(--background-default, #fafafa) 0%,
+			var(--background-80, rgba(250, 250, 250, 0.8)) 50.06%,
+			var(--background-default, #fafafa) 100%
+		);
+		z-index: 0;
+	}
+	.news_heading_wrapper {
+		display: flex;
+		width: 980px;
+		flex-direction: column;
+		align-items: center;
+		gap: 24px;
+
+		.title {
+			background: var(
+				--Gradients-Main-Gradient,
+				linear-gradient(
+					90deg,
+					var(--blue-main, #3dafe2) 0%,
+					var(--purple-main, #6f76c0) 100%
+				)
+			);
+			background-clip: text;
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+			position: relative;
+			text-align: center;
+			z-index: 1;
+		}
+		.description {
+			color: var(--text-secondary, rgba(14, 13, 15, 0.7));
+			text-align: center;
+			font-family: Urbanist;
+			font-size: 20px;
+			font-style: normal;
+			font-weight: 400;
+			line-height: 160%;
+			z-index: 1;
+			position: relative;
+		}
+	}
+	.news_container_wrapper {
+		display: flex;
+		position: relative;
+
+		gap: 24px;
+		z-index: 1;
+
+		.news-item {
+			display: flex;
+			width: 481px;
+			padding: 48px 0;
+			flex-direction: column;
+			align-items: center;
+			gap: 24px;
+			border-radius: 8px;
+			background: var(--background-80, rgba(250, 250, 250, 0.8));
+			box-shadow: 0 24px 32px 0 var(--shadow-24, rgba(14, 13, 15, 0.08));
+			position: relative;
+			overflow: hidden;
+
+			&::before {
+				position: absolute;
+				content: " ";
+				top: 0;
+				left: 0;
+				right: 0;
+				height: 10px;
+				background: var(--Gradients-Main-Gradient, #3dafe2);
+				z-index: 2;
+			}
+			.title {
+				text-align: center;
+				font-family: Urbanist;
+				font-size: 36px;
+				font-style: normal;
+				font-weight: 700;
+				line-height: 140%;
+				background: var(
+					--Gradients-Main-Gradient,
+					linear-gradient(
+						90deg,
+						var(--blue-main, #3dafe2) 0%,
+						var(--purple-main, #6f76c0) 100%
+					)
+				);
+				background-clip: text;
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+			}
+			.news-image {
+				width: 100%;
+				height: 280px;
+				display: flex;
+
+				flex-direction: column;
+				align-items: center;
+				gap: 24px;
+			}
+		}
+	}
 }

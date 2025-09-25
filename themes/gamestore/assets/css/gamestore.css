@@ -118,6 +118,7 @@ body {
 /* Variables */
 :root {
   --background-default: #fafafa;
+  --background-80: rgba(250, 250, 250, 0.8);
   --action-main: rgba(14, 13, 15, 0.64);
   --action-main-svg: rgb(14, 13, 15);
   --divider-main: rgba(14, 13, 15, 0.08);
@@ -125,6 +126,10 @@ body {
   --secondary-48: rgba(250, 250, 250, 0.48);
   --white-contrast: #0a090a;
   --purple-main: #6f76c0;
+  --text-secondary: rgba(14, 13, 15, 0.7);
+  --blue-main: rgba(61, 175, 226, 1);
+  --purple-main: rgba(111, 118, 192, 1);
+  --shadow-24:rgba(14, 13, 15, 0.08);
   --mask-gradient: linear-gradient(
     270deg,
     var(--secondary-0, rgba(14, 13, 15, 0)) 0%,
@@ -135,11 +140,17 @@ body {
     rgba(250, 250, 250, 0) 0%,
     #fafafa 100%
   );
-  --text-secondary: rgba(14, 13, 15, 0.7);
+
+  --Gradients-Main-Gradient: linear-gradient(
+    90deg,
+    var(--blue-main, #3dafe2) 0%,
+    var(--purple-main, #6f76c0) 100%
+  );
 }
 
 .dark-mode-gamestore {
   --background-default: #0e0d0f;
+  --background-80: rgba(14, 13, 15, 0.8);
   --action-main: rgba(255, 255, 255, 0.64);
   --action-main-svg: rgb(255, 255, 255);
   --divider-main: rgba(255, 255, 255, 0.12);
@@ -148,6 +159,7 @@ body {
   --wp--preset--color--base: #0e0d0f !important;
   --wp--preset--color--contrast: #ffffff !important;
   --white-contrast: #ffffff;
+  --shadow-24: rgba(0, 0, 0, 0.64);
   --mask-gradient: linear-gradient(
     270deg,
     var(--background-0, rgba(14, 13, 15, 0)) 0%,
@@ -306,7 +318,7 @@ h6 {
   row-gap: 24px;
 }
 
-.game-placeholder{
+.game-placeholder {
   border-radius: 8px;
   background: rgba(250, 250, 250, 0.08);
   width: calc(16.66666% - 13.33333px);
@@ -315,11 +327,13 @@ h6 {
 }
 
 @keyframes pulse {
-  0%{opacity: 1;}
-  50%{
-    opacity: .5;
+  0% {
+    opacity: 1;
   }
-  100%{
+  50% {
+    opacity: 0.5;
+  }
+  100% {
     opacity: 1;
   }
 }

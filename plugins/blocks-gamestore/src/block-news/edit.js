@@ -1,20 +1,20 @@
 import { __ } from "@wordpress/i18n";
 
 import {
+	BlockIcon,
 	InspectorControls,
-	MediaUpload,
-	MediaUploadCheck,
-	RichText,
+	MediaPlaceholder,
 	useBlockProps,
 } from "@wordpress/block-editor";
 
 import "./editor.scss";
 import {
-	Button,
+
 	PanelBody,
 	TextControl,
 	TextareaControl,
 } from "@wordpress/components";
+import ServerSideRender from "@wordpress/server-side-render";
 
 export default function Edit({ attributes, setAttributes }) {
 	const { title, description, bgImage } = attributes;
@@ -23,45 +23,38 @@ export default function Edit({ attributes, setAttributes }) {
 			<InspectorControls>
 				<PanelBody title="Settings">
 					<TextControl
-						label="Text Field"
-						help="Additional help text"
+						tagName="h2"
+						label="Title"
 						value={title}
+						className="title"
 						onChange={(title) => setAttributes({ title })}
 					/>
 					<TextareaControl
-						label="Text"
-						help="Enter some text"
+						tagName="p"
+						label="Description"
 						value={description}
+						className="description"
 						onChange={(description) => setAttributes(description)}
 					/>
-					<MediaUploadCheck>
-						<MediaUpload
-							onSelect={(media) => setAttributes({ bgImage: media.url })}
-							value={bgImage}
-							render={({ open }) => (
-								<Button className="is-secondary" onClick={open}>Open Media Library</Button>
-							)}
-						/>
-					</MediaUploadCheck>
+
+					{bgImage && <img src={bgImage} alt="" />}
+
+					<MediaPlaceholder
+						onSelect={(media) => setAttributes({ bgImage: media.url })}
+						accept="image/*"
+						icon={<BlockIcon icon="format-image" />}
+						allowedTypes={["image"]}
+						multiple={false}
+						labels={{ title: "Background Image" }}
+					></MediaPlaceholder>
 				</PanelBody>
 			</InspectorControls>
 
 			<div {...useBlockProps()}>
-				<RichText
-					tagName="h1"
-					className="hero-title"
-					value={title}
-					onChange={(title) => setAttributes({ title })}
-					placeholder="Enter title"
+				<ServerSideRender
+					block="blocks-gamestore/block-news"
+					attributes={attributes}
 				/>
-				<RichText
-					tagName="p"
-					value={description}
-					onChange={(description) => setAttributes({ description })}
-					placeholder={__("Heading...")}
-				/>
-
-				<img src={bgImage} alt="" />
 			</div>
 		</>
 	);
