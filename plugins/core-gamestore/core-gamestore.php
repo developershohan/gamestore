@@ -16,4 +16,5 @@
 
 
  
- require_once(GAMESTORE_PLUGIN_PATH.'/inc/games-core.php');
+ require_once(GAMESTORE_PLUGIN_PATH.'/inc/games-meta.php');
+ require_once(GAMESTORE_PLUGIN_PATH.'/inc/games-search.php');
